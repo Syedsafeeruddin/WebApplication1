@@ -1,0 +1,106 @@
+﻿@model WebApplication1.Stock
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Stock</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Prod_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prod_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sup_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sup_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stock_In)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stock_In)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stock_Out)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stock_Out)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.Cus_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.Cus_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.Prod_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order.Prod_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order_Line.Order_Line_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order_Line.Order_Line_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Prod_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.Prod_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Supplier.Sup_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Supplier.Sup_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Stock_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

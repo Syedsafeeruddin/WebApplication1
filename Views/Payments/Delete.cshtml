@@ -1,0 +1,88 @@
+﻿@model WebApplication1.Payment
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Payment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cash_In)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cash_In)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cash_Out)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cash_Out)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Check_Voucher_In)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Check_Voucher_In)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Check_Voucher_Out)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Check_Voucher_Out)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Supplier.Sup_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Supplier.Sup_Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

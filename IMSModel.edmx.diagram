@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d9cf7fd5c39841e4b8ba6605dbe62268" Name="Diagram1" ZoomLevel="47">
+        <EntityTypeShape EntityType="DBMSProjectIMSModel.Customer" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBMSProjectIMSModel.Order" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBMSProjectIMSModel.Order_Line" Width="1.5" PointX="8.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBMSProjectIMSModel.Payment" Width="1.5" PointX="10.5" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBMSProjectIMSModel.Product" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBMSProjectIMSModel.Sales_Person" Width="1.5" PointX="1.5" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBMSProjectIMSModel.Stock" Width="1.5" PointX="10.5" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBMSProjectIMSModel.Supplier" Width="1.5" PointX="8.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBMSProjectIMSModel.Supplier_Prod" Width="1.5" PointX="6" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBMSProjectIMSModel.Transaction" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <AssociationConnector Association="DBMSProjectIMSModel.FK_Customer_Sales_Person_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="DBMSProjectIMSModel.FK_Order_Cus_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="DBMSProjectIMSModel.FK_Stock_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="DBMSProjectIMSModel.FK_Transaction_Cus_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="DBMSProjectIMSModel.FK_Order_Line_OrderID" ManuallyRouted="false" />
+        <AssociationConnector Association="DBMSProjectIMSModel.FK_Order_Prod_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="DBMSProjectIMSModel.FK_Stock_Order_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="DBMSProjectIMSModel.FK_Order_Line_Prod_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="DBMSProjectIMSModel.FK_Stock_Order_Line_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="DBMSProjectIMSModel.FK_Payment_SupplierID" ManuallyRouted="false" />
+        <AssociationConnector Association="DBMSProjectIMSModel.FK_Stock_Prod_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="DBMSProjectIMSModel.FK_Supplier_Prod_ProductID" ManuallyRouted="false" />
+        <AssociationConnector Association="DBMSProjectIMSModel.FK_Stock_Supplier_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="DBMSProjectIMSModel.FK_Supplier_Prod_SupplierID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,968 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBMSProjectIMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Cus_ID" />
+          </Key>
+          <Property Name="Cus_ID" Type="int" Nullable="false" />
+          <Property Name="Sales_Person_ID" Type="int" />
+          <Property Name="Cus_Name" Type="varchar" MaxLength="255" />
+          <Property Name="Cus_Address" Type="varchar" MaxLength="255" />
+          <Property Name="Cus_Phone" Type="varchar" MaxLength="15" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Order_ID" />
+          </Key>
+          <Property Name="Order_ID" Type="int" Nullable="false" />
+          <Property Name="Cus_ID" Type="int" />
+          <Property Name="Prod_ID" Type="int" />
+          <Property Name="Prod_Name" Type="varchar" MaxLength="255" />
+          <Property Name="Prod_Price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Order_Date" Type="date" />
+          <Property Name="Order_Status" Type="varchar" MaxLength="50" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Order_Line">
+          <Key>
+            <PropertyRef Name="Order_Line_ID" />
+          </Key>
+          <Property Name="Order_Line_ID" Type="int" Nullable="false" />
+          <Property Name="Order_ID" Type="int" />
+          <Property Name="Prod_ID" Type="int" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Payment_ID" />
+          </Key>
+          <Property Name="Payment_ID" Type="int" Nullable="false" />
+          <Property Name="Supplier_ID" Type="int" />
+          <Property Name="Cash_In" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Cash_Out" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Check_Voucher_In" Type="varchar" MaxLength="50" />
+          <Property Name="Check_Voucher_Out" Type="varchar" MaxLength="50" />
+          <Property Name="Amount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Product_ID" />
+          </Key>
+          <Property Name="Product_ID" Type="int" Nullable="false" />
+          <Property Name="Prod_Name" Type="varchar" MaxLength="255" />
+          <Property Name="Prod_Description" Type="varchar" MaxLength="255" />
+          <Property Name="Prod_Price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Prod_In" Type="int" />
+          <Property Name="Prod_Out" Type="int" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Sales_Person">
+          <Key>
+            <PropertyRef Name="Sales_Person_ID" />
+          </Key>
+          <Property Name="Sales_Person_ID" Type="int" Nullable="false" />
+          <Property Name="Sales_Person_Name" Type="varchar" MaxLength="255" />
+          <Property Name="Order_ID" Type="int" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="Stock_ID" />
+          </Key>
+          <Property Name="Stock_ID" Type="int" Nullable="false" />
+          <Property Name="Prod_ID" Type="int" />
+          <Property Name="Prod_Name" Type="varchar" MaxLength="255" />
+          <Property Name="Cus_ID" Type="int" />
+          <Property Name="Supplier_ID" Type="int" />
+          <Property Name="Sup_Name" Type="varchar" MaxLength="255" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Stock_In" Type="int" />
+          <Property Name="Stock_Out" Type="int" />
+          <Property Name="Order_ID" Type="int" />
+          <Property Name="Order_Line_ID" Type="int" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="Supplier_ID" />
+          </Key>
+          <Property Name="Supplier_ID" Type="int" Nullable="false" />
+          <Property Name="Sup_Name" Type="varchar" MaxLength="255" />
+          <Property Name="Sup_Address" Type="varchar" MaxLength="255" />
+          <Property Name="Sup_Phone" Type="varchar" MaxLength="15" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Supplier_Prod">
+          <Key>
+            <PropertyRef Name="Supplier_Prod_ID" />
+          </Key>
+          <Property Name="Supplier_Prod_ID" Type="int" Nullable="false" />
+          <Property Name="Supplier_ID" Type="int" />
+          <Property Name="Product_ID" Type="int" />
+          <Property Name="Sup_Name" Type="varchar" MaxLength="255" />
+          <Property Name="Sup_Price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Supplier_Quantity" Type="int" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="Transaction_ID" />
+          </Key>
+          <Property Name="Transaction_ID" Type="int" Nullable="false" />
+          <Property Name="Cus_ID" Type="int" />
+          <Property Name="Cus_Name" Type="varchar" MaxLength="255" />
+          <Property Name="Prod_Name" Type="varchar" MaxLength="255" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Rate" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Amount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Total_Amount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Tax" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <Association Name="FK_Customer_Sales_Person_ID">
+          <End Role="Sales_Person" Type="Self.Sales_Person" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sales_Person">
+              <PropertyRef Name="Sales_Person_ID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="Sales_Person_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Cus_ID">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Cus_ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="Cus_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Line_OrderID">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Order_Line" Type="Self.Order_Line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Order_ID" />
+            </Principal>
+            <Dependent Role="Order_Line">
+              <PropertyRef Name="Order_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Line_Prod_ID">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Order_Line" Type="Self.Order_Line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Order_Line">
+              <PropertyRef Name="Prod_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Prod_ID">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="Prod_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_SupplierID">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Supplier_ID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="Supplier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_ID">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Cus_ID" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="Cus_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_Order_ID">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Order_ID" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="Order_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_Order_Line_ID">
+          <End Role="Order_Line" Type="Self.Order_Line" Multiplicity="0..1" />
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order_Line">
+              <PropertyRef Name="Order_Line_ID" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="Order_Line_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_Prod_ID">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="Prod_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_Supplier_ID">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Supplier_ID" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="Supplier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supplier_Prod_ProductID">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Supplier_Prod" Type="Self.Supplier_Prod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Supplier_Prod">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supplier_Prod_SupplierID">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Supplier_Prod" Type="Self.Supplier_Prod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Supplier_ID" />
+            </Principal>
+            <Dependent Role="Supplier_Prod">
+              <PropertyRef Name="Supplier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transaction_Cus_ID">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Cus_ID" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="Cus_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBMSProjectIMSModelStoreContainer">
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order_Line" EntityType="Self.Order_Line" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sales_Person" EntityType="Self.Sales_Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier_Prod" EntityType="Self.Supplier_Prod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Customer_Sales_Person_ID" Association="Self.FK_Customer_Sales_Person_ID">
+            <End Role="Sales_Person" EntitySet="Sales_Person" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Cus_ID" Association="Self.FK_Order_Cus_ID">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Line_OrderID" Association="Self.FK_Order_Line_OrderID">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="Order_Line" EntitySet="Order_Line" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Line_Prod_ID" Association="Self.FK_Order_Line_Prod_ID">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Order_Line" EntitySet="Order_Line" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Prod_ID" Association="Self.FK_Order_Prod_ID">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_SupplierID" Association="Self.FK_Payment_SupplierID">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_ID" Association="Self.FK_Stock_ID">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Order_ID" Association="Self.FK_Stock_Order_ID">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Order_Line_ID" Association="Self.FK_Stock_Order_Line_ID">
+            <End Role="Order_Line" EntitySet="Order_Line" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Prod_ID" Association="Self.FK_Stock_Prod_ID">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Supplier_ID" Association="Self.FK_Stock_Supplier_ID">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supplier_Prod_ProductID" Association="Self.FK_Supplier_Prod_ProductID">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Supplier_Prod" EntitySet="Supplier_Prod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supplier_Prod_SupplierID" Association="Self.FK_Supplier_Prod_SupplierID">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Supplier_Prod" EntitySet="Supplier_Prod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transaction_Cus_ID" Association="Self.FK_Transaction_Cus_ID">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Transaction" EntitySet="Transaction" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBMSProjectIMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Cus_ID" />
+          </Key>
+          <Property Name="Cus_ID" Type="Int32" Nullable="false" />
+          <Property Name="Sales_Person_ID" Type="Int32" />
+          <Property Name="Cus_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cus_Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cus_Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Sales_Person" Relationship="Self.FK_Customer_Sales_Person_ID" FromRole="Customer" ToRole="Sales_Person" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Cus_ID" FromRole="Customer" ToRole="Order" />
+          <NavigationProperty Name="Stocks" Relationship="Self.FK_Stock_ID" FromRole="Customer" ToRole="Stock" />
+          <NavigationProperty Name="Transactions" Relationship="Self.FK_Transaction_Cus_ID" FromRole="Customer" ToRole="Transaction" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Order_ID" />
+          </Key>
+          <Property Name="Order_ID" Type="Int32" Nullable="false" />
+          <Property Name="Cus_ID" Type="Int32" />
+          <Property Name="Prod_ID" Type="Int32" />
+          <Property Name="Prod_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Prod_Price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Order_Date" Type="DateTime" Precision="0" />
+          <Property Name="Order_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Order_Cus_ID" FromRole="Order" ToRole="Customer" />
+          <NavigationProperty Name="Order_Line" Relationship="Self.FK_Order_Line_OrderID" FromRole="Order" ToRole="Order_Line" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Order_Prod_ID" FromRole="Order" ToRole="Product" />
+          <NavigationProperty Name="Stocks" Relationship="Self.FK_Stock_Order_ID" FromRole="Order" ToRole="Stock" />
+        </EntityType>
+        <EntityType Name="Order_Line">
+          <Key>
+            <PropertyRef Name="Order_Line_ID" />
+          </Key>
+          <Property Name="Order_Line_ID" Type="Int32" Nullable="false" />
+          <Property Name="Order_ID" Type="Int32" />
+          <Property Name="Prod_ID" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Line_OrderID" FromRole="Order_Line" ToRole="Order" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Order_Line_Prod_ID" FromRole="Order_Line" ToRole="Product" />
+          <NavigationProperty Name="Stocks" Relationship="Self.FK_Stock_Order_Line_ID" FromRole="Order_Line" ToRole="Stock" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Payment_ID" />
+          </Key>
+          <Property Name="Payment_ID" Type="Int32" Nullable="false" />
+          <Property Name="Supplier_ID" Type="Int32" />
+          <Property Name="Cash_In" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Cash_Out" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Check_Voucher_In" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Check_Voucher_Out" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_Payment_SupplierID" FromRole="Payment" ToRole="Supplier" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Product_ID" />
+          </Key>
+          <Property Name="Product_ID" Type="Int32" Nullable="false" />
+          <Property Name="Prod_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Prod_Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Prod_Price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Prod_In" Type="Int32" />
+          <Property Name="Prod_Out" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Prod_ID" FromRole="Product" ToRole="Order" />
+          <NavigationProperty Name="Order_Line" Relationship="Self.FK_Order_Line_Prod_ID" FromRole="Product" ToRole="Order_Line" />
+          <NavigationProperty Name="Stocks" Relationship="Self.FK_Stock_Prod_ID" FromRole="Product" ToRole="Stock" />
+          <NavigationProperty Name="Supplier_Prod" Relationship="Self.FK_Supplier_Prod_ProductID" FromRole="Product" ToRole="Supplier_Prod" />
+        </EntityType>
+        <EntityType Name="Sales_Person">
+          <Key>
+            <PropertyRef Name="Sales_Person_ID" />
+          </Key>
+          <Property Name="Sales_Person_ID" Type="Int32" Nullable="false" />
+          <Property Name="Sales_Person_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Order_ID" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_Sales_Person_ID" FromRole="Sales_Person" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="Stock_ID" />
+          </Key>
+          <Property Name="Stock_ID" Type="Int32" Nullable="false" />
+          <Property Name="Prod_ID" Type="Int32" />
+          <Property Name="Prod_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cus_ID" Type="Int32" />
+          <Property Name="Supplier_ID" Type="Int32" />
+          <Property Name="Sup_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Stock_In" Type="Int32" />
+          <Property Name="Stock_Out" Type="Int32" />
+          <Property Name="Order_ID" Type="Int32" />
+          <Property Name="Order_Line_ID" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Stock_ID" FromRole="Stock" ToRole="Customer" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Stock_Order_ID" FromRole="Stock" ToRole="Order" />
+          <NavigationProperty Name="Order_Line" Relationship="Self.FK_Stock_Order_Line_ID" FromRole="Stock" ToRole="Order_Line" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Stock_Prod_ID" FromRole="Stock" ToRole="Product" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_Stock_Supplier_ID" FromRole="Stock" ToRole="Supplier" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="Supplier_ID" />
+          </Key>
+          <Property Name="Supplier_ID" Type="Int32" Nullable="false" />
+          <Property Name="Sup_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Sup_Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Sup_Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK_Payment_SupplierID" FromRole="Supplier" ToRole="Payment" />
+          <NavigationProperty Name="Stocks" Relationship="Self.FK_Stock_Supplier_ID" FromRole="Supplier" ToRole="Stock" />
+          <NavigationProperty Name="Supplier_Prod" Relationship="Self.FK_Supplier_Prod_SupplierID" FromRole="Supplier" ToRole="Supplier_Prod" />
+        </EntityType>
+        <EntityType Name="Supplier_Prod">
+          <Key>
+            <PropertyRef Name="Supplier_Prod_ID" />
+          </Key>
+          <Property Name="Supplier_Prod_ID" Type="Int32" Nullable="false" />
+          <Property Name="Supplier_ID" Type="Int32" />
+          <Property Name="Product_ID" Type="Int32" />
+          <Property Name="Sup_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Sup_Price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Supplier_Quantity" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Supplier_Prod_ProductID" FromRole="Supplier_Prod" ToRole="Product" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_Supplier_Prod_SupplierID" FromRole="Supplier_Prod" ToRole="Supplier" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="Transaction_ID" />
+          </Key>
+          <Property Name="Transaction_ID" Type="Int32" Nullable="false" />
+          <Property Name="Cus_ID" Type="Int32" />
+          <Property Name="Cus_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Prod_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Rate" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Total_Amount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Tax" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Transaction_Cus_ID" FromRole="Transaction" ToRole="Customer" />
+        </EntityType>
+        <Association Name="FK_Customer_Sales_Person_ID">
+          <End Role="Sales_Person" Type="Self.Sales_Person" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sales_Person">
+              <PropertyRef Name="Sales_Person_ID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="Sales_Person_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Cus_ID">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Cus_ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="Cus_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_ID">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Cus_ID" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="Cus_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transaction_Cus_ID">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Cus_ID" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="Cus_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Line_OrderID">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Order_Line" Type="Self.Order_Line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Order_ID" />
+            </Principal>
+            <Dependent Role="Order_Line">
+              <PropertyRef Name="Order_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Prod_ID">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="Prod_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_Order_ID">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Order_ID" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="Order_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Line_Prod_ID">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Order_Line" Type="Self.Order_Line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Order_Line">
+              <PropertyRef Name="Prod_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_Order_Line_ID">
+          <End Role="Order_Line" Type="Self.Order_Line" Multiplicity="0..1" />
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order_Line">
+              <PropertyRef Name="Order_Line_ID" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="Order_Line_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_SupplierID">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Supplier_ID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="Supplier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_Prod_ID">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="Prod_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supplier_Prod_ProductID">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Supplier_Prod" Type="Self.Supplier_Prod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Supplier_Prod">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_Supplier_ID">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Supplier_ID" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="Supplier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supplier_Prod_SupplierID">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Supplier_Prod" Type="Self.Supplier_Prod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Supplier_ID" />
+            </Principal>
+            <Dependent Role="Supplier_Prod">
+              <PropertyRef Name="Supplier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBMSProjectIMSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="Order_Line" EntityType="Self.Order_Line" />
+          <EntitySet Name="Payments" EntityType="Self.Payment" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Sales_Person" EntityType="Self.Sales_Person" />
+          <EntitySet Name="Stocks" EntityType="Self.Stock" />
+          <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+          <EntitySet Name="Supplier_Prod" EntityType="Self.Supplier_Prod" />
+          <EntitySet Name="Transactions" EntityType="Self.Transaction" />
+          <AssociationSet Name="FK_Customer_Sales_Person_ID" Association="Self.FK_Customer_Sales_Person_ID">
+            <End Role="Sales_Person" EntitySet="Sales_Person" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Cus_ID" Association="Self.FK_Order_Cus_ID">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_ID" Association="Self.FK_Stock_ID">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Stock" EntitySet="Stocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transaction_Cus_ID" Association="Self.FK_Transaction_Cus_ID">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Line_OrderID" Association="Self.FK_Order_Line_OrderID">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="Order_Line" EntitySet="Order_Line" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Prod_ID" Association="Self.FK_Order_Prod_ID">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Order_ID" Association="Self.FK_Stock_Order_ID">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="Stock" EntitySet="Stocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Line_Prod_ID" Association="Self.FK_Order_Line_Prod_ID">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Order_Line" EntitySet="Order_Line" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Order_Line_ID" Association="Self.FK_Stock_Order_Line_ID">
+            <End Role="Order_Line" EntitySet="Order_Line" />
+            <End Role="Stock" EntitySet="Stocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_SupplierID" Association="Self.FK_Payment_SupplierID">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Prod_ID" Association="Self.FK_Stock_Prod_ID">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Stock" EntitySet="Stocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supplier_Prod_ProductID" Association="Self.FK_Supplier_Prod_ProductID">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Supplier_Prod" EntitySet="Supplier_Prod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Supplier_ID" Association="Self.FK_Stock_Supplier_ID">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Stock" EntitySet="Stocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supplier_Prod_SupplierID" Association="Self.FK_Supplier_Prod_SupplierID">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Supplier_Prod" EntitySet="Supplier_Prod" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBMSProjectIMSModelStoreContainer" CdmEntityContainer="DBMSProjectIMSEntities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="DBMSProjectIMSModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Cus_ID" ColumnName="Cus_ID" />
+                <ScalarProperty Name="Sales_Person_ID" ColumnName="Sales_Person_ID" />
+                <ScalarProperty Name="Cus_Name" ColumnName="Cus_Name" />
+                <ScalarProperty Name="Cus_Address" ColumnName="Cus_Address" />
+                <ScalarProperty Name="Cus_Phone" ColumnName="Cus_Phone" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="DBMSProjectIMSModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+                <ScalarProperty Name="Cus_ID" ColumnName="Cus_ID" />
+                <ScalarProperty Name="Prod_ID" ColumnName="Prod_ID" />
+                <ScalarProperty Name="Prod_Name" ColumnName="Prod_Name" />
+                <ScalarProperty Name="Prod_Price" ColumnName="Prod_Price" />
+                <ScalarProperty Name="Order_Date" ColumnName="Order_Date" />
+                <ScalarProperty Name="Order_Status" ColumnName="Order_Status" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_Line">
+            <EntityTypeMapping TypeName="DBMSProjectIMSModel.Order_Line">
+              <MappingFragment StoreEntitySet="Order_Line">
+                <ScalarProperty Name="Order_Line_ID" ColumnName="Order_Line_ID" />
+                <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+                <ScalarProperty Name="Prod_ID" ColumnName="Prod_ID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="DBMSProjectIMSModel.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="Payment_ID" ColumnName="Payment_ID" />
+                <ScalarProperty Name="Supplier_ID" ColumnName="Supplier_ID" />
+                <ScalarProperty Name="Cash_In" ColumnName="Cash_In" />
+                <ScalarProperty Name="Cash_Out" ColumnName="Cash_Out" />
+                <ScalarProperty Name="Check_Voucher_In" ColumnName="Check_Voucher_In" />
+                <ScalarProperty Name="Check_Voucher_Out" ColumnName="Check_Voucher_Out" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="DBMSProjectIMSModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Prod_Name" ColumnName="Prod_Name" />
+                <ScalarProperty Name="Prod_Description" ColumnName="Prod_Description" />
+                <ScalarProperty Name="Prod_Price" ColumnName="Prod_Price" />
+                <ScalarProperty Name="Prod_In" ColumnName="Prod_In" />
+                <ScalarProperty Name="Prod_Out" ColumnName="Prod_Out" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales_Person">
+            <EntityTypeMapping TypeName="DBMSProjectIMSModel.Sales_Person">
+              <MappingFragment StoreEntitySet="Sales_Person">
+                <ScalarProperty Name="Sales_Person_ID" ColumnName="Sales_Person_ID" />
+                <ScalarProperty Name="Sales_Person_Name" ColumnName="Sales_Person_Name" />
+                <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stocks">
+            <EntityTypeMapping TypeName="DBMSProjectIMSModel.Stock">
+              <MappingFragment StoreEntitySet="Stock">
+                <ScalarProperty Name="Stock_ID" ColumnName="Stock_ID" />
+                <ScalarProperty Name="Prod_ID" ColumnName="Prod_ID" />
+                <ScalarProperty Name="Prod_Name" ColumnName="Prod_Name" />
+                <ScalarProperty Name="Cus_ID" ColumnName="Cus_ID" />
+                <ScalarProperty Name="Supplier_ID" ColumnName="Supplier_ID" />
+                <ScalarProperty Name="Sup_Name" ColumnName="Sup_Name" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Stock_In" ColumnName="Stock_In" />
+                <ScalarProperty Name="Stock_Out" ColumnName="Stock_Out" />
+                <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+                <ScalarProperty Name="Order_Line_ID" ColumnName="Order_Line_ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="DBMSProjectIMSModel.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="Supplier_ID" ColumnName="Supplier_ID" />
+                <ScalarProperty Name="Sup_Name" ColumnName="Sup_Name" />
+                <ScalarProperty Name="Sup_Address" ColumnName="Sup_Address" />
+                <ScalarProperty Name="Sup_Phone" ColumnName="Sup_Phone" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Supplier_Prod">
+            <EntityTypeMapping TypeName="DBMSProjectIMSModel.Supplier_Prod">
+              <MappingFragment StoreEntitySet="Supplier_Prod">
+                <ScalarProperty Name="Supplier_Prod_ID" ColumnName="Supplier_Prod_ID" />
+                <ScalarProperty Name="Supplier_ID" ColumnName="Supplier_ID" />
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Sup_Name" ColumnName="Sup_Name" />
+                <ScalarProperty Name="Sup_Price" ColumnName="Sup_Price" />
+                <ScalarProperty Name="Supplier_Quantity" ColumnName="Supplier_Quantity" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transactions">
+            <EntityTypeMapping TypeName="DBMSProjectIMSModel.Transaction">
+              <MappingFragment StoreEntitySet="Transaction">
+                <ScalarProperty Name="Transaction_ID" ColumnName="Transaction_ID" />
+                <ScalarProperty Name="Cus_ID" ColumnName="Cus_ID" />
+                <ScalarProperty Name="Cus_Name" ColumnName="Cus_Name" />
+                <ScalarProperty Name="Prod_Name" ColumnName="Prod_Name" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Total_Amount" ColumnName="Total_Amount" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

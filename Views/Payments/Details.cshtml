@@ -1,0 +1,82 @@
+﻿@model WebApplication1.Payment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Payment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cash_In)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cash_In)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cash_Out)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cash_Out)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Check_Voucher_In)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Check_Voucher_In)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Check_Voucher_Out)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Check_Voucher_Out)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Supplier.Sup_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Supplier.Sup_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Payment_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
